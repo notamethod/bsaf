@@ -1,0 +1,7 @@
+#!/usr/bin/make -f
+
+export JAVA_HOME=/usr/lib/jvm/default-java
+export CLASSPATH=/usr/share/java/junit4.jar
+
+%:
+	dh $@ --with javahelper

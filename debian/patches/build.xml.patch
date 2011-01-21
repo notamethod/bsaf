@@ -1,0 +1,159 @@
+Description: Patch to be able to use ant for building package. This makes it
+ easier to support offline building of this library.
+Author: Andres Mejia <mcitadel@gmail.com>
+Forwarded: no
+Last-Update: 2011-01-21
+
+--- /dev/null
++++ bsaf-1.9/build.xml
+@@ -0,0 +1,150 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project name="bsaf" default="dist" basedir=".">
++    <description>
++        Better Swing Application Framework, a fork of the original Swing
++        Application Framework
++    </description>
++
++    <property environment="env"/>
++    <property name="src.dir" value="src/main/java" />
++    <property name="resources.dir" value="src/main/resources" />
++    <property name="test-src.dir" value="src/test/java" />
++    <property name="test-resources.dir" value="src/test/resources" />
++    <property name="build.dir" value="build" />
++    <property name="dist.dir" value="dist" />
++    <property name="test.dir" value="test" />
++    <property name="javadoc.dir" value="${dist.dir}/javadoc" />
++    <property name="bundles.dir" value="${dist.dir}/bundles" />
++    <property name="www.dir" value="www" />
++    <property name="external.doc"
++        value="http://download.oracle.com/javase/6/docs/api" />
++
++    <target name="clean">
++        <delete dir="${build.dir}"/>
++        <delete dir="${dist.dir}"/>
++        <delete dir="${test.dir}"/>
++    </target>
++
++    <target name="init">
++        <mkdir dir="${build.dir}"/>
++        <mkdir dir="${dist.dir}"/>
++        <mkdir dir="${test.dir}"/>
++        <tstamp/>
++    </target>
++
++    <target name="compile" depends="init">
++        <javac source="1.5" destdir="${build.dir}" memoryMaximumSize="200m"
++               fork="yes" encoding="UTF-8">
++            <src path="${src.dir}"/>
++        </javac>
++        <copy todir="${build.dir}">
++            <fileset dir="${resources.dir}">
++                <exclude name="COPYING"/>
++            </fileset>
++        </copy>
++    </target>
++
++    <target name="compile-test" depends="compile">
++        <javac source="1.5" destdir="${test.dir}" memoryMaximumSize="200m"
++               fork="yes" encoding="UTF-8">
++            <classpath>
++                <pathelement location="${build.dir}"/>
++            </classpath>
++            <src path="${test-src.dir}"/>
++        </javac>
++        <copy todir="${test.dir}">
++            <fileset dir="${test-resources.dir}"/>
++        </copy>
++    </target>
++
++    <target name="check-display">
++      <condition property="have.display">
++        <isset property="env.DISPLAY"/>
++      </condition>
++    </target>
++
++    <target name="test" depends="compile-test, check-display">
++        <junit printsummary="yes" showoutput="yes" fork="yes"
++               haltonfailure="yes">
++            <sysproperty key="LocalStorage.dir"
++                          value="${basedir}/${build.dir}/local-storage.tmp" />
++            <formatter type="brief" usefile="false"/>
++            <classpath>
++                <pathelement location="${test.dir}"/>
++                <pathelement location="${build.dir}"/>
++            </classpath>
++
++            <test name="org.jdesktop.application.AbstractBeanTest"/>
++            <test name="org.jdesktop.application.ApplicationActionMapTest"/>
++            <test name="org.jdesktop.application.ApplicationActionsTest"
++                  if="have.display"/>
++            <test name="org.jdesktop.application.ApplicationDefaultLNFResourceTest"/>
++            <test name="org.jdesktop.application.ApplicationEndTest"/>
++            <test name="org.jdesktop.application.ApplicationMotifLNFResourceTest"/>
++            <test name="org.jdesktop.application.ApplicationNimbusLNFResourceTest"/>
++            <test name="org.jdesktop.application.ApplicationNoLNFResourceTest"/>
++            <test name="org.jdesktop.application.ApplicationPrivateCtorTest"/>
++            <test name="org.jdesktop.application.ApplicationSystemLNFResourceTest"/>
++            <test name="org.jdesktop.application.ApplicationTest"
++                  if="have.display"/>
++            <test name="org.jdesktop.application.BadSessionStateTest"
++                  if="have.display"/>
++            <test name="org.jdesktop.application.CustomPropertySupportTest"
++                  if="have.display"/>
++            <test name="org.jdesktop.application.DefaultInputBlockerDelayTest"
++                  if="have.display"/>
++            <test name="org.jdesktop.application.EnabledPropertyInGermanLocaleTest"
++                  if="have.display"/>
++            <test name="org.jdesktop.application.LocalStorageTest"/>
++            <test name="org.jdesktop.application.MnemonicTextTest"/>
++            <test name="org.jdesktop.application.ProxyActionTest"
++                  if="have.display"/>
++            <test name="org.jdesktop.application.ResourceManagerTest"/>
++            <test name="org.jdesktop.application.ResourceMapTest"
++                  if="have.display"/>
++            <test name="org.jdesktop.application.TaskMonitorTest"/>
++            <test name="org.jdesktop.application.TaskStateTest"/>
++            <test name="org.jdesktop.application.TaskTest"/>
++        </junit>
++    </target>
++
++    <target name="jar" depends="compile" description="Create the bsaf.jar file">
++      <jar destfile="${dist.dir}/bsaf-1.9.jar">
++        <fileset dir="${build.dir}"/>
++        <manifest>
++          <attribute name="Built-By" value="${user.name}"/>
++        </manifest>
++      </jar>
++    </target>
++
++    <target name="javadoc" depends="init">
++        <javadoc access="protected" link=""
++            packagenames="org.jdesktop.application" author="true"
++            destdir="${javadoc.dir}" nodeprecated="false"
++            nodeprecatedlist="false" noindex="false" nonavbar="false"
++            notree="false" use="true" version="true">
++            <link href="${external.doc}" />
++            <sourcepath>
++                <pathelement path="${src.dir}" />
++            </sourcepath>
++        </javadoc>
++    </target>
++
++    <target name="dist" depends="jar, test, javadoc"/>
++
++    <target name="bundles" depends="clean, dist">
++        <mkdir dir="${bundles.dir}"/>
++        <zip basedir="." destfile="${bundles.dir}/bsaf-src.zip"
++            includes="src/**, configs/**, build.xml, pom.xml"
++        />
++        <zip basedir="${javadoc.dir}" destfile="${bundles.dir}/bsaf-doc.zip"/>
++        <jar basedir="${build.dir}" destfile="${bundles.dir}/bsaf.jar"/>
++    </target>
++
++    <target name="www" depends="clean, javadoc">
++        <delete dir="${www.dir}/javadoc"/>
++        <copy todir="${www.dir}/javadoc">
++            <fileset dir="${javadoc.dir}"/>
++        </copy>
++    </target>
++</project>

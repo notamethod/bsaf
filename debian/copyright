@@ -1,0 +1,32 @@
+bsaf was debianized by Andres Mejia. The packaging work is licensed under the
+same terms as bsaf.
+
+Copyright (c) 2005-2006 Sun Microsystems, Inc., 4150 Network Circle, Santa
+Clara, California 95054, U.S.A. All rights reserved.  Use is subject
+to license terms below.  Sun, Sun Microsystems and the Sun logo are
+trademarks or registered trademarks of Sun Microsystems, Inc. in the
+U.S. and other countries.
+
+Copyright (c) 2009-2010 Illya Yalovyy <yalovoy@gmail.com>,  Use is subject
+to license terms below.
+
+Notice: This product is covered by U.S. export control laws and may be
+subject to the export or import laws in other countries. These laws may
+restrict the fields of use for this software and may require you to
+secure government authorization.
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2.1 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with this library. If not, see <http://www.gnu.org/licenses/>.
+
+On Debian GNU/Linux systems, the complete text of the GNU Lesser General
+Public License can be found in `/usr/share/common-licenses/LGPL-2.1'.

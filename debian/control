@@ -1,0 +1,52 @@
+Source: bsaf
+Section: java
+Priority: optional
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Uploaders: Andres Mejia <mcitadel@gmail.com>
+Build-Depends: debhelper (>= 7.0.50~), javahelper, default-jdk, ant,
+ ant-optional, junit4
+Standards-Version: 3.9.1
+Homepage: http://kenai.com/projects/bsaf
+Vcs-Browser: http://git.debian.org/?p=pkg-java/bsaf.git
+Vcs-Git: git://git.debian.org/git/pkg-java/bsaf.git
+
+Package: libbetter-appframework-java
+Architecture: all
+Depends: default-jre | java2-runtime, ${java:Depends}, ${misc:Depends}
+Provides: libappframework-java
+Description: Java Better Swing Application Framework (library)
+ The Better Swing Application Framework is a fork of the original Swing
+ Application Framework (appframework) reference implementation of JSR 296. Since
+ August 2009, the original Swing Application Framework project has been on hold,
+ and therefore this fork was created to carry on the work until the original
+ project resumes.
+ .
+ The last public release of the original appframework project was version 1.03.
+ The BSAF project currently aims at producing a new release, version 1.9, with
+ the primary goals of improving stability, keeping backward compatibility with
+ SAF 1.03, fixing bugs, updating documentation, and creating more unit tests and
+ examples.
+ .
+ This package contains the Java library for the Better Swing Application
+ Framework.
+
+Package: libbetter-appframework-java-doc
+Architecture: all
+Section: doc
+Depends: ${misc:Depends}
+Recommends: ${java:Recommends}
+Description: Java Better Swing Application Framework (documentation)
+ The Better Swing Application Framework is a fork of the original Swing
+ Application Framework (appframework) reference implementation of JSR 296. Since
+ August 2009, the original Swing Application Framework project has been on hold,
+ and therefore this fork was created to carry on the work until the original
+ project resumes.
+ .
+ The last public release of the original appframework project was version 1.03.
+ The BSAF project currently aims at producing a new release, version 1.9, with
+ the primary goals of improving stability, keeping backward compatibility with
+ SAF 1.03, fixing bugs, updating documentation, and creating more unit tests and
+ examples.
+ .
+ This package contains the documentation for the Better Swing Application
+ Framework.

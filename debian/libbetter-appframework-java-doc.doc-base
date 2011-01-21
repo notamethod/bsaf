@@ -1,0 +1,10 @@
+Document: libbetter-appframework-java-doc
+Title: Better Swing Application Framework API
+Author: Illya Yalovyy
+Abstract: This is the API documentation for the Better Swing Application
+ Framework.
+Section: Java
+
+Format: HTML
+Index: /usr/share/doc/libbetter-appframework-java-doc/api/index.html
+Files: /usr/share/doc/libbetter-appframework-java-doc/api/*.html
