@@ -12,7 +12,7 @@ Vcs-Git: git://git.debian.org/git/pkg-java/bsaf.git
 
 Package: libbetter-appframework-java
 Architecture: all
-Depends: default-jre | java2-runtime, ${java:Depends}, ${misc:Depends}
+Depends: ${java:Depends}, ${misc:Depends}
 Provides: libappframework-java
 Description: Java Better Swing Application Framework (library)
  The Better Swing Application Framework is a fork of the original Swing
