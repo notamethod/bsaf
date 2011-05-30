@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 export JAVA_HOME=/usr/lib/jvm/default-java
-export CLASSPATH=/usr/share/java/junit4.jar
+export CLASSPATH=/usr/share/java/junit4.jar:/usr/share/icedtea-web/netx.jar
 
 %:
 	dh $@ --with javahelper
