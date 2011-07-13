@@ -2,9 +2,9 @@ Source: bsaf
 Section: java
 Priority: optional
 Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
-Uploaders: Andres Mejia <mcitadel@gmail.com>
+Uploaders: Andres Mejia <mcitadel@gmail.com>, Andrew Ross <ubuntu@rossfamily.co.uk>
 Build-Depends: debhelper (>= 7.0.50~), javahelper, default-jdk, ant,
- ant-optional, junit4, icedtea-netx
+ ant-optional, junit4, libnetx-java
 Standards-Version: 3.9.2
 Homepage: http://kenai.com/projects/bsaf
 Vcs-Browser: http://git.debian.org/?p=pkg-java/bsaf.git

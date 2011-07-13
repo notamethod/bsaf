@@ -1,3 +1,11 @@
+bsaf (1.9-3) unstable; urgency=low
+
+  * Team upload.
+  * Add myself to uploaders.
+  * Depend on libnetx-java instead of icedtea-netx for javax.jnlp.*
+
+ -- Andrew Ross <ubuntu@rossfamily.co.uk>  Wed, 13 Jul 2011 22:50:38 +0100
+
 bsaf (1.9-2) unstable; urgency=low
 
   * Team upload.
