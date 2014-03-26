@@ -1,1 +1,2 @@
-# bsaf is currently retrieved from an svn tag.
+version=3
+https://svn.kenai.com/svn/bsaf~main/framework/tags/ bsaf-([\d\.]+)/

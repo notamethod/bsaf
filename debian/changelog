@@ -2,6 +2,7 @@ bsaf (1.9-5) UNRELEASED; urgency=medium
 
   * Team upload.
   * Build with maven-debian-helper instead of javahelper
+  * debian/watch: Added an URL checking the SVN tags
   * debian/control:
     - Standards-Version updated to 3.9.5 (no changes)
     - Use canonical URLs for the Vcs-* fields
