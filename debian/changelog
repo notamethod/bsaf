@@ -1,6 +1,7 @@
 bsaf (1.9-5) UNRELEASED; urgency=medium
 
   * Team upload.
+  * Build with maven-debian-helper instead of javahelper
   * debian/control:
     - Standards-Version updated to 3.9.5 (no changes)
   * Switch to debhelper level 9

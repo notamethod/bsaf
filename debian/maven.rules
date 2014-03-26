@@ -1,0 +1,3 @@
+
+junit junit jar s/4\..*/4.x/ * *
+org.jdesktop.bsaf bsaf jar s/.*/debian/ * *

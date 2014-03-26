@@ -1,0 +1,7 @@
+
+org.apache.maven.plugins maven-changes-plugin * * * *
+org.apache.maven.plugins maven-checkstyle-plugin * * * *
+org.apache.maven.plugins maven-pmd-plugin * * * *
+org.apache.maven.plugins maven-source-plugin * * * *
+org.codehaus.mojo findbugs-maven-plugin * * * *
+org.jvnet.wagon-svn wagon-svn * * * *

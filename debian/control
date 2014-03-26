@@ -3,8 +3,8 @@ Section: java
 Priority: optional
 Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
 Uploaders: Andres Mejia <amejia@debian.org>, Andrew Ross <ubuntu@rossfamily.co.uk>
-Build-Depends: debhelper (>= 9), javahelper, default-jdk, ant,
- ant-optional, junit4, libnetx-java
+Build-Depends: cdbs, debhelper (>= 9), default-jdk, maven-debian-helper, junit4,
+ libnetx-java, libmaven-javadoc-plugin-java
 Standards-Version: 3.9.5
 Homepage: http://kenai.com/projects/bsaf
 Vcs-Browser: http://git.debian.org/?p=pkg-java/bsaf.git
@@ -12,7 +12,8 @@ Vcs-Git: git://git.debian.org/git/pkg-java/bsaf.git
 
 Package: libbetter-appframework-java
 Architecture: all
-Depends: ${java:Depends}, ${misc:Depends}
+Depends: ${misc:Depends}, ${maven:Depends}
+Suggests: ${maven:OptionalDepends}
 Provides: libappframework-java
 Description: Java Better Swing Application Framework (library)
  The Better Swing Application Framework is a fork of the original Swing
@@ -33,8 +34,8 @@ Description: Java Better Swing Application Framework (library)
 Package: libbetter-appframework-java-doc
 Architecture: all
 Section: doc
-Depends: ${misc:Depends}
-Recommends: ${java:Recommends}
+Depends: ${maven:DocDepends}, ${misc:Depends}
+Suggests: ${maven:DocOptionalDepends}
 Description: Java Better Swing Application Framework (documentation)
  The Better Swing Application Framework is a fork of the original Swing
  Application Framework (appframework) reference implementation of JSR 296. Since
