@@ -1,2 +1,2 @@
 version=3
-https://svn.kenai.com/svn/bsaf~main/framework/tags/ bsaf-([\d\.]+)/
+https://svn.kenai.com/svn/bsaf~main/framework/tags/ bsaf-([\d\.]+)/ debian debian/orig-tar.sh
