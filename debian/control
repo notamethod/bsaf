@@ -5,7 +5,7 @@ Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.or
 Uploaders: Andres Mejia <amejia@debian.org>, Andrew Ross <ubuntu@rossfamily.co.uk>
 Build-Depends: debhelper (>= 7.0.50~), javahelper, default-jdk, ant,
  ant-optional, junit4, libnetx-java
-Standards-Version: 3.9.2
+Standards-Version: 3.9.5
 Homepage: http://kenai.com/projects/bsaf
 Vcs-Browser: http://git.debian.org/?p=pkg-java/bsaf.git
 Vcs-Git: git://git.debian.org/git/pkg-java/bsaf.git

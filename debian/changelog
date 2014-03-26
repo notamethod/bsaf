@@ -1,3 +1,11 @@
+bsaf (1.9-5) UNRELEASED; urgency=medium
+
+  * Team upload.
+  * debian/control:
+    - Standards-Version updated to 3.9.5 (no changes)
+
+ -- Emmanuel Bourg <ebourg@apache.org>  Wed, 26 Mar 2014 13:17:48 +0100
+
 bsaf (1.9-4) UNRELEASED; urgency=low
 
   * Update to my @debian.org email.
