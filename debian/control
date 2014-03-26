@@ -6,9 +6,9 @@ Uploaders: Andres Mejia <amejia@debian.org>, Andrew Ross <ubuntu@rossfamily.co.u
 Build-Depends: cdbs, debhelper (>= 9), default-jdk, maven-debian-helper, junit4,
  libnetx-java, libmaven-javadoc-plugin-java
 Standards-Version: 3.9.5
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-java/bsaf.git
+Vcs-Git: git://anonscm.debian.org/pkg-java/bsaf.git
 Homepage: http://kenai.com/projects/bsaf
-Vcs-Browser: http://git.debian.org/?p=pkg-java/bsaf.git
-Vcs-Git: git://git.debian.org/git/pkg-java/bsaf.git
 
 Package: libbetter-appframework-java
 Architecture: all

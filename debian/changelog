@@ -4,6 +4,7 @@ bsaf (1.9-5) UNRELEASED; urgency=medium
   * Build with maven-debian-helper instead of javahelper
   * debian/control:
     - Standards-Version updated to 3.9.5 (no changes)
+    - Use canonical URLs for the Vcs-* fields
   * Switch to debhelper level 9
 
  -- Emmanuel Bourg <ebourg@apache.org>  Wed, 26 Mar 2014 13:17:48 +0100
