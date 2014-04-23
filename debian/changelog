@@ -1,5 +1,6 @@
-bsaf (1.9-5) UNRELEASED; urgency=medium
+bsaf (1.9-4) unstable; urgency=medium
 
+  [ Emmanuel Bourg ]
   * Team upload.
   * Build with maven-debian-helper instead of javahelper
   * debian/watch: Added an URL checking the SVN tags
@@ -10,13 +11,12 @@ bsaf (1.9-5) UNRELEASED; urgency=medium
     - Use canonical URLs for the Vcs-* fields
   * Switch to debhelper level 9
 
+  [ tony mancill ]
+  * Remove Andres Mejia <amejia@debian.org> from Uploaders.
+    (Closes: #743518)
+  * Package now correctly builds from source. (Closes: #690152)
+
  -- Emmanuel Bourg <ebourg@apache.org>  Wed, 26 Mar 2014 13:17:48 +0100
-
-bsaf (1.9-4) UNRELEASED; urgency=low
-
-  * Update to my @debian.org email.
-
- -- Andres Mejia <amejia@debian.org>  Sun, 17 Jul 2011 13:17:52 -0400
 
 bsaf (1.9-3) unstable; urgency=low
 
