@@ -2,7 +2,7 @@ Source: bsaf
 Section: java
 Priority: optional
 Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
-Uploaders: Andres Mejia <amejia@debian.org>, Andrew Ross <ubuntu@rossfamily.co.uk>
+Uploaders: Andrew Ross <ubuntu@rossfamily.co.uk>
 Build-Depends: cdbs, debhelper (>= 9), default-jdk, maven-debian-helper, junit4,
  libnetx-java, libmaven-javadoc-plugin-java
 Standards-Version: 3.9.5
