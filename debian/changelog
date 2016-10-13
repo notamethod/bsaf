@@ -1,3 +1,10 @@
+bsaf (1.9.2-1) UNRELEASED; urgency=medium
+
+  * Team upload.
+  * 
+
+ -- Markus Koschany <apo@debian.org>  Thu, 13 Oct 2016 19:44:18 +0200
+
 bsaf (1.9-4) unstable; urgency=medium
 
   [ Emmanuel Bourg ]
