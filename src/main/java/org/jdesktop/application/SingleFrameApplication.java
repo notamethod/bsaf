@@ -452,4 +452,14 @@ public abstract class SingleFrameApplication extends Application {
         initRootPaneContainer(c);
         ((Window) c).setVisible(true);
     }
+
+    @Override
+    protected void end() {
+        JFrame mainFrame = getMainFrame();
+        if (mainFrame != null || mainFrame.isDisplayable()) {
+            mainFrame.setVisible(false);
+            mainFrame.dispose();
+        }
+        super.end();
+    }
 }

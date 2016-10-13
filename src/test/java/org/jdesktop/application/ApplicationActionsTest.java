@@ -5,12 +5,15 @@
 
 package org.jdesktop.application;
 
+import java.lang.reflect.InvocationTargetException;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.awt.event.ActionEvent;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.SwingUtilities;
 
 /**
  * Test the Actions that are defined by the Application class:
@@ -21,11 +24,15 @@ import javax.swing.JCheckBox;
  */
 public class ApplicationActionsTest
 {
+    public static final String DIRECTACTION = "directAction";
+    public static final String NEGATEDACTION = "negatedAction";
 
     public static class DefaultActionsApplication extends WaitForStartupApplication
     {
         boolean deleteCalled = false;
         boolean selected = true;
+        boolean flag1 = true;
+        boolean flag2 = true;
 
         @Action
         public void delete()
@@ -36,10 +43,39 @@ public class ApplicationActionsTest
 
         }
 
+        @Action(enabledProperty="flag1")
+        public void directAction() {
+
+        }
+
+        @Action(disabledProperty="flag2")
+        public void negatedAction() {
+
+        }
+
         public boolean isSelected() {
             return selected;
         }
 
+        public boolean isFlag1() {
+            return flag1;
+        }
+
+        public void setFlag1(boolean flag1) {
+            boolean oldValue = this.flag1;
+            this.flag1 = flag1;
+            firePropertyChange("flag1", oldValue, flag1);
+        }
+
+        public boolean isFlag2() {
+            return flag2;
+        }
+
+        public void setFlag2(boolean flag2) {
+            boolean oldValue = this.flag2;
+            this.flag2 = flag2;
+            firePropertyChange("flag2", oldValue, flag2);
+        }
     }
 
     @BeforeClass
@@ -143,4 +179,56 @@ public class ApplicationActionsTest
         assertTrue(checkBox.isSelected());
     }
 
+    @Test
+    public void testDirectAction() {
+        ApplicationActionMap actionMap = actionMap();
+        JButton button = new JButton(actionMap.get(DIRECTACTION));
+        assertTrue(button.isEnabled());
+    }
+
+    @Test
+    public void testNegatedAction() {
+        ApplicationActionMap actionMap = actionMap();
+        JButton button = new JButton(actionMap.get(NEGATEDACTION));
+        assertFalse(button.isEnabled());
+    }
+
+    @Test
+    public void testSetDirectAction() {
+        ApplicationActionMap actionMap = actionMap();
+        final JButton button = new JButton(actionMap.get(DIRECTACTION));
+        DefaultActionsApplication app = Application.getInstance(DefaultActionsApplication.class);
+        actionMap.get(DIRECTACTION).setEnabled(false);
+        assertFalse(app.isFlag1());
+        
+        waitForSwing();
+
+        assertFalse(button.isEnabled());
+    }
+
+    @Test
+    public void testSetNegatedAction() {
+        ApplicationActionMap actionMap = actionMap();
+        JButton button = new JButton(actionMap.get(NEGATEDACTION));
+        DefaultActionsApplication app = Application.getInstance(DefaultActionsApplication.class);
+        actionMap.get(NEGATEDACTION).setEnabled(true);
+        assertFalse(app.isFlag2());
+
+        waitForSwing();
+
+        assertTrue(button.isEnabled());
+    }
+
+    private static void waitForSwing() {
+        try {
+            SwingUtilities.invokeAndWait(new Runnable() {
+
+                @Override
+                public void run() {
+                }
+            });
+        } catch (InterruptedException ex) {
+        } catch (InvocationTargetException ex) {
+        }
+    }
 }

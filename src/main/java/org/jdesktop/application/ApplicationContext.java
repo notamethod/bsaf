@@ -47,7 +47,7 @@ public class ApplicationContext extends AbstractBean {
         localStorage = new LocalStorage(this);
         sessionStorage = new SessionStorage(this);
         taskServices = new CopyOnWriteArrayList<TaskService>();
-        taskServices.add(new TaskService("default"));
+        taskServices.add(new TaskService(TaskService.DEFAULT_NAME));
         taskServicesReadOnly = Collections.unmodifiableList(taskServices);
     }
 
@@ -453,7 +453,7 @@ public class ApplicationContext extends AbstractBean {
      * 
      */
     public final TaskService getTaskService() {
-        return getTaskService("default");
+        return getTaskService(TaskService.DEFAULT_NAME);
     }
 
     /**

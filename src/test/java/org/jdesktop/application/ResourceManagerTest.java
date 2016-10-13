@@ -6,7 +6,9 @@
 
 package org.jdesktop.application;
 
+import java.util.List;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  * [TBD]
@@ -38,4 +40,40 @@ public class ResourceManagerTest
         ResourceMap rm = manager.getResourceMap(getClass());
         // [TBD]
     }
+
+    @Test
+    public void testCustomResourceFolder() {
+        TestResourceManager manager = resourceManager();
+        final String customFolderName = "customFolderName";
+        manager.setResourceFolder(customFolderName);
+        List<String> classBundleNames = manager.getClassBundleNames(Object.class);
+        assertTrue(classBundleNames.get(0).contains(customFolderName));
+    }
+
+    @Test
+    public void testCustomResourceFolderFramework() {
+        TestResourceManager manager = resourceManager();
+        final String customFolderName = "customFolderName";
+        final String defaultFolderName = "resources";
+        manager.setResourceFolder(customFolderName);
+        List<String> classBundleNames = manager.getClassBundleNames(Application.class);
+        assertTrue(classBundleNames.get(0).contains(defaultFolderName));
+    }
+
+    @Test
+    public void testDefaultResourceFolder() {
+        TestResourceManager manager = resourceManager();
+        final String defaultFolderName = "resources";
+        List<String> classBundleNames = manager.getClassBundleNames(Object.class);
+        assertTrue(classBundleNames.get(0).contains(defaultFolderName));
+    }
+
+    @Test
+    public void testNoResourceFolder() {
+        TestResourceManager manager = resourceManager();
+        manager.setResourceFolder(null);
+        List<String> classBundleNames = manager.getClassBundleNames(Object.class);
+        assertTrue(classBundleNames.get(0).equals(Object.class.getName()));
+    }
+
 }

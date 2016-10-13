@@ -5,6 +5,7 @@
 package org.jdesktop.application.session;
 
 import java.awt.Component;
+import java.awt.EventQueue;
 import javax.swing.JSplitPane;
 
 /**
@@ -80,10 +81,15 @@ public class SplitPaneProperty implements PropertySupport {
         checkComponent(c);
         if (state == null) return;
         if (state instanceof SplitPaneState) {
-            JSplitPane p = (JSplitPane) c;
-            SplitPaneState sps = (SplitPaneState) state;
+            final JSplitPane p = (JSplitPane) c;
+            final SplitPaneState sps = (SplitPaneState) state;
             if (p.getOrientation() == sps.getOrientation()) {
-                p.setDividerLocation(sps.getDividerLocation());
+                EventQueue.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        p.setDividerLocation(sps.getDividerLocation());
+                    }
+                });
             }
         } else {
             throw new IllegalArgumentException("invalid state");

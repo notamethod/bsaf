@@ -35,10 +35,18 @@ import java.util.logging.Logger;
  * chain contains resources shared by the entire application.
  * <p>
  * Resources for a class are defined by an eponymous {@code ResourceBundle}
- * in a {@code resources} subpackage.  The Application class itself
- * may also provide resources. A complete
+ * in a {@code resources} subpackage. It is possible to change name of the subpackage
+ * or even use resources from the class's package.
+ * <pre>
+ * public class MyApp extends SingleFrameApplication {
+ *   public MyApp() {
+ *       getContext().getResourceManager().setResourceFolder("myresourcessubpackage");
+ *   }
+ *}
+ * </pre>
+ * The Application class itself may also provide resources. A complete
  * description of the naming conventions for ResourceBundles is provided
- * by the {@link #getResourceMap(Class) getResourceMap()} method.
+ * by the {@link #getResourceMap(Class, Class) getResourceMap()} method.
  * <p>
  * The mapping from classes and {@code Application} to a list
  * ResourceBundle names is handled by two protected methods: 
@@ -55,10 +63,14 @@ import java.util.logging.Logger;
 public class ResourceManager extends AbstractBean {
 
     private static final Logger logger = Logger.getLogger(ResourceManager.class.getName());
+
+    private static final String DEFAULT_RESOURCES_FOLDER = "resources";
+
     private final Map<String, ResourceMap> resourceMaps;
     private final ApplicationContext context;
     private List<String> applicationBundleNames = null;
     private ResourceMap appResourceMap = null;
+    private String resourceFolder = DEFAULT_RESOURCES_FOLDER;
 
     /**
      * Construct a {@code ResourceManager}.  Typically applications
@@ -210,7 +222,7 @@ public class ResourceManager extends AbstractBean {
      *       <td>com/myco/resources/MyScreen.properties</td>
      *     </tr>
      *     <tr>
-     *       <td>2/td>
+     *       <td>2</td>
      *       <td>application: com.myco.MyApp</td>
      *       <td>com.myco.resources.MyApp</td>
      *       <td>com/myco/resources/MyApp.properties</td>
@@ -234,6 +246,8 @@ public class ResourceManager extends AbstractBean {
      * <p>
      * ResourceMaps are constructed lazily and cached.  One ResourceMap
      * is constructed for each sequence of classes in the same package.
+     *
+     * Name of the resources subpackage can be customized with {@link #setResourceFolder(java.lang.String) setResourcesFolder()} method.
      * 
      * @param startClass the first class whose ResourceBundles will be included
      * @param stopClass the last class whose ResourceBundles will be included
@@ -350,7 +364,7 @@ public class ResourceManager extends AbstractBean {
     public void setApplicationBundleNames(List<String> bundleNames) {
         if (bundleNames != null) {
             for (String bundleName : bundleNames) {
-                if ((bundleName == null) || (bundleNames.size() == 0)) {
+                if ((bundleName == null) || (bundleNames.isEmpty())) {
                     throw new IllegalArgumentException("invalid bundle name \"" + bundleName + "\"");
                 }
             }
@@ -375,19 +389,30 @@ public class ResourceManager extends AbstractBean {
      * Although this could result in a collision, creating more
      * complex rules for inner classes would be a burden for
      * developers.
+     * Name of the subpackage is stored in resourcesFolder variable.
+     * If resourcesFolder is NULL or empty no subpackage is used.
      */
     private String classBundleBaseName(Class cls) {
         String className = cls.getName();
-        StringBuffer sb = new StringBuffer();
+
+        boolean frameworkResource = className.startsWith("org.jdesktop.application");
+
+        if (!frameworkResource && (getResourceFolder() == null || getResourceFolder().isEmpty())) {
+            return className;
+        }
+
+        StringBuilder sb = new StringBuilder();
         int i = className.lastIndexOf('.');
+
         if (i > 0) {
             sb.append(className.substring(0, i));
-            sb.append(".resources.");
-            sb.append(cls.getSimpleName());
-        } else {
-            sb.append("resources.");
-            sb.append(cls.getSimpleName());
+            sb.append(".");
         }
+        
+        sb.append(frameworkResource?DEFAULT_RESOURCES_FOLDER:getResourceFolder());
+        sb.append(".");
+        sb.append(cls.getSimpleName());
+
         return sb.toString();
     }
 
@@ -482,5 +507,23 @@ public class ResourceManager extends AbstractBean {
             throw new IllegalArgumentException("null platform");
         }
         getResourceMap().setPlatform(platform);
+    }
+
+    /**
+     * Returns resources subpackage name
+     * @return resource folder name
+     */
+    public String getResourceFolder() {
+        return resourceFolder;
+    }
+
+    /**
+     * Sets resources subpackage name.
+     * If resourceFolder is {@code null} or empty no subpackage is used.
+     *
+     * @param resourceFolder resources subpackage name
+     */
+    public void setResourceFolder(String resourceFolder) {
+        this.resourceFolder = resourceFolder;
     }
 }

@@ -23,6 +23,7 @@ import javax.swing.SwingUtilities;
  * <p>
  */
 public class TaskService extends AbstractBean {
+    public static final String DEFAULT_NAME = "default";
 
     private final String name;
     private final ExecutorService executorService;

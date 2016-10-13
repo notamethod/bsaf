@@ -149,18 +149,27 @@ public class ApplicationActionMap extends ActionMap {
      * annotation and for the class's @ProxyActions annotation
      */
     private void addAnnotationActions(ResourceMap resourceMap) {
-        Class<?> actionsClass = getActionsClass();
+        final Class<?> actionsClass = getActionsClass();
         // @Action
         for (Method m : actionsClass.getDeclaredMethods()) {
             Action action = m.getAnnotation(Action.class);
             if (action != null) {
-                String methodName = m.getName();
-                String enabledProperty = aString(action.enabledProperty(), null);
-                String selectedProperty = aString(action.selectedProperty(), null);
-                String actionName = aString(action.name(), methodName);
-                Task.BlockingScope block = action.block();
+                final String methodName = m.getName();
+                final String enabledProperty = aString(action.enabledProperty(), null);
+                final String disabledProperty = aString(action.disabledProperty(), null);
+                final String selectedProperty = aString(action.selectedProperty(), null);
+                final String actionName = aString(action.name(), methodName);
+                final String taskService = aString(action.taskService(), TaskService.DEFAULT_NAME);
+                final Task.BlockingScope block = action.block();
+
+                if(enabledProperty != null && disabledProperty != null)
+                    throw new IllegalArgumentException("Action annotation contains both enabled and disabled attributes.");
+
+                boolean inverted = disabledProperty != null;
+
                 ApplicationAction appAction =
-                        new ApplicationAction(this, resourceMap, actionName, m, enabledProperty, selectedProperty, block);
+                        new ApplicationAction(this, resourceMap, actionName, m, inverted?disabledProperty:enabledProperty, 
+                        inverted, selectedProperty, taskService, block);
                 putAction(actionName, appAction);
             }
         }
@@ -199,11 +208,11 @@ public class ApplicationActionMap extends ActionMap {
             }
             if (needsPCL) {
                 try {
-                    Class actionsClass = getActionsClass();
-                    Method m = actionsClass.getMethod("addPropertyChangeListener", PropertyChangeListener.class);
+                    final Class actionsClass = getActionsClass();
+                    final Method m = actionsClass.getMethod("addPropertyChangeListener", PropertyChangeListener.class);
                     m.invoke(getActionsObject(), new ActionsPCL());
                 } catch (Exception e) {
-                    String s = "addPropertyChangeListener undefined " + actionsClass;
+                    final String s = "addPropertyChangeListener undefined " + actionsClass;
                     throw new Error(s, e);
                 }
             }

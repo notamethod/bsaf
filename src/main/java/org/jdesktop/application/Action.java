@@ -60,30 +60,40 @@ import org.jdesktop.application.Task.BlockingScope;
 @Target(ElementType.METHOD)
 public @interface Action {
 
-	/**
-	 * The action name. The method name is used as an action name if not specified.
-	 */
+    /**
+     * The action name. The method name is used as an action name if not specified.
+     */
     String name() default "";
 
-	/**
-	 * The parameter binds the enabled state of the @Action to the current value of a property.
-	 */
+    /**
+     * The parameter binds the enabled state of the @Action to the current value of a property.
+     */
     String enabledProperty() default "";
 
-	/**
-	 * The parameter binds the selected state of the @Action to the current value of a property.
-	 */
+    /**
+     * The parameter binds the disabled state of the @Action to the current value of a property.
+     */
+    String disabledProperty() default "";
+
+    /**
+     * The parameter binds the selected state of the @Action to the current value of a property.
+     */
     String selectedProperty() default "";
 
-	/**
-	 * The parameter indicates that the GUI should be blocked while the background task is running.
-	 * @see Task
-	 */
+    /**
+     * The parameter associates this action to a specific task service
+     */
+    String taskService() default TaskService.DEFAULT_NAME;
+    
+    /**
+     * The parameter indicates that the GUI should be blocked while the background task is running.
+     * @see Task
+     */
     BlockingScope block() default BlockingScope.NONE;
-
-	/**
-	 * This annotation is not used yet
-	 */
+    
+    /**
+     * This annotation is not used yet
+     */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.PARAMETER)
     @interface Parameter {
@@ -91,4 +101,3 @@ public @interface Action {
         String value() default "";
     }
 }
-

@@ -1504,6 +1504,13 @@ public class ResourceMap {
     }
 
     private static class KeyStrokeStringConverter extends ResourceConverter {
+        private static final String KEYWORD_SHORTCUT = "shortcut";
+        private static final String KEYWORD_META = "meta";
+        private static final String KEYWORD_CONTROL = "control";
+
+        private static final String REPLACE = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() ==
+            Event.META_MASK ? KEYWORD_META : KEYWORD_CONTROL;
+        private static final Pattern PATTERN = Pattern.compile(KEYWORD_SHORTCUT);
 
         KeyStrokeStringConverter() {
             super(KeyStroke.class);
@@ -1511,9 +1518,9 @@ public class ResourceMap {
 
         @Override
         public Object parseString(String s, ResourceMap ignore) {
-            if (s.contains("shortcut")) {
+            if (s.contains(KEYWORD_SHORTCUT)) {
                 int k = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
-                s = s.replaceAll("shortcut", (k == Event.META_MASK) ? "meta" : "control");
+                s = PATTERN.matcher(s).replaceFirst(REPLACE);
             }
             return KeyStroke.getKeyStroke(s);
         }
