@@ -1,0 +1,30 @@
+From: Markus Koschany <apo@debian.org>
+Date: Thu, 13 Oct 2016 19:56:31 +0200
+Subject: jnlp dependency
+
+Point to netx.jar to provide the JNLP classes
+Forwarded: not-needed
+---
+ pom.xml | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pom.xml b/pom.xml
+index 25e53cf..c2e381a 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -138,7 +138,7 @@
+       <artifactId>jnlp</artifactId>
+       <version>1.6</version>
+       <scope>system</scope>
+-      <systemPath>${java.home}/lib/javaws.jar</systemPath>
++      <systemPath>/usr/share/java/netx.jar</systemPath>
+     </dependency>
+   </dependencies>
+   <reporting>
+@@ -218,4 +218,4 @@
+       </build>
+     </profile>
+   </profiles>
+-</project>
+\ No newline at end of file
++</project>
