@@ -163,7 +163,7 @@ public class LocalStorage extends AbstractBean {
             }
         }
         if (el.exception != null) {
-            throw new LSException("save failed \"" + fileName + "\"", el.exception);
+            throw new IOException("save failed \"" + fileName + "\"", el.exception);
         }
         OutputStream ost = null;
         try {
@@ -196,7 +196,7 @@ public class LocalStorage extends AbstractBean {
             d.setExceptionListener(el);
             Object bean = d.readObject();
             if (el.exception != null) {
-                throw new LSException("load failed \"" + fileName + "\"", el.exception);
+                throw new IOException("load failed \"" + fileName + "\"", el.exception);
             }
             return bean;
         } finally {
@@ -316,23 +316,6 @@ public class LocalStorage extends AbstractBean {
         firePropertyChange("directory", oldValue, this.directory);
     }
 
-
-    //TODO: Use IOException instead
-    /* Papers over the fact that the String,Throwable IOException 
-     * constructor was only introduced in Java 6.
-     */
-    private static class LSException extends IOException {
-
-        public LSException(String s, Throwable e) {
-            super(s);
-            initCause(e);
-        }
-
-        public LSException(String s) {
-            super(s);
-        }
-    }
-
     /* There are some (old) Java classes that aren't proper beans.  Rectangle
      * is one of these.  When running within the secure sandbox, writing a 
      * Rectangle with XMLEncoder causes a security exception because 
@@ -435,7 +418,7 @@ public class LocalStorage extends AbstractBean {
             try {
                 return new BufferedInputStream(new FileInputStream(path));
             } catch (IOException e) {
-                throw new LSException("couldn't open input file \"" + fileName + "\"", e);
+                throw new IOException("couldn't open input file \"" + fileName + "\"", e);
             }
         }
 
@@ -530,7 +513,7 @@ public class LocalStorage extends AbstractBean {
             try {
                 return new URL(bs.getCodeBase(), name);
             } catch (MalformedURLException e) {
-                throw new LSException("invalid filename \"" + name + "\"", e);
+                throw new IOException("invalid filename \"" + name + "\"", e);
             }
         }
 
@@ -541,7 +524,7 @@ public class LocalStorage extends AbstractBean {
             try {
                 return new BufferedInputStream(ps.get(fileURL).getInputStream());
             } catch (Exception e) {
-                throw new LSException("openInputFile \"" + fileName + "\" failed", e);
+                throw new IOException("openInputFile \"" + fileName + "\" failed", e);
             }
         }
 
@@ -569,7 +552,7 @@ public class LocalStorage extends AbstractBean {
                     throw new IOException("unable to create FileContents object");
                 }
             } catch (Exception e) {
-                throw new LSException("openOutputFile \"" + fileName + "\" failed", e);
+                throw new IOException("openOutputFile \"" + fileName + "\" failed", e);
             }
         }
 
@@ -581,7 +564,7 @@ public class LocalStorage extends AbstractBean {
                 ps.delete(fileURL);
                 return true;
             } catch (Exception e) {
-                throw new LSException("openInputFile \"" + fileName + "\" failed", e);
+                throw new IOException("openInputFile \"" + fileName + "\" failed", e);
             }
         }
     }
