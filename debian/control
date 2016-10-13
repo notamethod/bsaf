@@ -5,7 +5,6 @@ Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.or
 Uploaders:
  Andrew Ross <ubuntu@rossfamily.co.uk>
 Build-Depends:
- cdbs,
  debhelper (>= 10),
  default-jdk,
  junit4,
