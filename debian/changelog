@@ -1,9 +1,14 @@
-bsaf (1.9.2-1) UNRELEASED; urgency=medium
+bsaf (1.9.2-1) unstable; urgency=medium
 
   * Team upload.
-  * 
+  * New upstream version 1.9.2.
+  * Switch to compat level 10.
+  * Declare compliance with Debian Policy 3.9.8.
+  * wrap-and-sort -sa.
+  * Switch from cdbs to dh sequencer.
+  * Vcs: Use cgit and https.
 
- -- Markus Koschany <apo@debian.org>  Thu, 13 Oct 2016 19:44:18 +0200
+ -- Markus Koschany <apo@debian.org>  Thu, 13 Oct 2016 19:54:30 +0200
 
 bsaf (1.9-4) unstable; urgency=medium
 
