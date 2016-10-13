@@ -8,6 +8,7 @@ bsaf (1.9.2-1) unstable; urgency=medium
   * Switch from cdbs to dh sequencer.
   * Vcs: Use cgit and https.
   * Rebase jnlp-dependency.patch.
+  * Use --no-parent option.
 
  -- Markus Koschany <apo@debian.org>  Thu, 13 Oct 2016 19:54:30 +0200
 
