@@ -12,8 +12,8 @@ Build-Depends:
  libnetx-java,
  maven-debian-helper
 Standards-Version: 3.9.8
-Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-java/bsaf.git
-Vcs-Git: git://anonscm.debian.org/pkg-java/bsaf.git
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-java/bsaf.git
+Vcs-Git: https://anonscm.debian.org/git/pkg-java/bsaf.git
 Homepage: http://kenai.com/projects/bsaf
 
 Package: libbetter-appframework-java
