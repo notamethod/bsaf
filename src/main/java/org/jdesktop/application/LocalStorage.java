@@ -4,19 +4,16 @@
 */
 package org.jdesktop.application;
 
-import static org.jdesktop.application.Application.KEY_APPLICATION_VENDOR_ID;
 import org.jdesktop.application.utils.AppHelper;
 import org.jdesktop.application.utils.PlatformType;
 
-import javax.jnlp.*;
 import java.awt.*;
 import java.beans.*;
 import java.io.*;
-import java.lang.reflect.Method;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static org.jdesktop.application.Application.KEY_APPLICATION_VENDOR_ID;
 
 /**
  * Access to per application, per user, local file storage.
@@ -458,114 +455,8 @@ public class LocalStorage extends AbstractBean {
      * require apps that aren't web started to bundle javaws.jar
      */
     private LocalIO getPersistenceServiceIO() {
-        try {
-            Class smClass = Class.forName("javax.jnlp.ServiceManager");
-            Method getServiceNamesMethod = smClass.getMethod("getServiceNames");
-            String[] serviceNames = (String[]) getServiceNamesMethod.invoke(null);
-            boolean psFound = false;
-            boolean bsFound = false;
-            for (String serviceName : serviceNames) {
-                if (serviceName.equals("javax.jnlp.BasicService")) {
-                    bsFound = true;
-                } else if (serviceName.equals("javax.jnlp.PersistenceService")) {
-                    psFound = true;
-                }
-            }
-            if (bsFound && psFound) {
-                return new PersistenceServiceIO();
-            }
-        } catch (Exception ignore) {
-            // either the classes or the services can't be found
-        }
+        System.out.println("JNLP is dead !");
         return null;
     }
 
-    private final class PersistenceServiceIO extends LocalIO {
-
-        private BasicService bs;
-        private PersistenceService ps;
-
-        private String initFailedMessage(String s) {
-            return getClass().getName() + " initialization failed: " + s;
-        }
-
-        PersistenceServiceIO() {
-            try {
-                bs = (BasicService) ServiceManager.lookup("javax.jnlp.BasicService");
-                ps = (PersistenceService) ServiceManager.lookup("javax.jnlp.PersistenceService");
-            } catch (UnavailableServiceException e) {
-                logger.log(Level.SEVERE, initFailedMessage("ServiceManager.lookup"), e);
-                bs = null;
-                ps = null;
-            }
-        }
-
-        private void checkBasics(String s) throws IOException {
-            if ((bs == null) || (ps == null)) {
-                throw new IOException(initFailedMessage(s));
-            }
-        }
-
-        private URL fileNameToURL(String name) throws IOException {
-            if (name == null) {
-                throw new IOException("name is not set");
-            }
-            try {
-                return new URL(bs.getCodeBase(), name);
-            } catch (MalformedURLException e) {
-                throw new IOException("invalid filename \"" + name + "\"", e);
-            }
-        }
-
-        @Override
-        public InputStream openInputFile(String fileName) throws IOException {
-            checkBasics("openInputFile");
-            URL fileURL = fileNameToURL(fileName);
-            try {
-                return new BufferedInputStream(ps.get(fileURL).getInputStream());
-            } catch (Exception e) {
-                throw new IOException("openInputFile \"" + fileName + "\" failed", e);
-            }
-        }
-
-        @Override
-        public OutputStream openOutputFile(String fileName, boolean append) throws IOException {
-            checkBasics("openOutputFile");
-            URL fileURL = fileNameToURL(fileName);
-            try {
-                FileContents fc = null;
-                try {
-                    fc = ps.get(fileURL);
-                } catch (FileNotFoundException e) {
-                    /* Verify that the max size for new PersistenceService
-                     * files is >= 100K (2^17) before opening one.
-                     */
-                    long maxSizeRequest = 131072L;
-                    long maxSize = ps.create(fileURL, maxSizeRequest);
-                    if (maxSize >= maxSizeRequest) {
-                        fc = ps.get(fileURL);
-                    }
-                }
-                if ((fc != null) && (fc.canWrite())) {
-                    return new BufferedOutputStream(fc.getOutputStream(!append));
-                } else {
-                    throw new IOException("unable to create FileContents object");
-                }
-            } catch (Exception e) {
-                throw new IOException("openOutputFile \"" + fileName + "\" failed", e);
-            }
-        }
-
-        @Override
-        public boolean deleteFile(String fileName) throws IOException {
-            checkBasics("deleteFile");
-            URL fileURL = fileNameToURL(fileName);
-            try {
-                ps.delete(fileURL);
-                return true;
-            } catch (Exception e) {
-                throw new IOException("openInputFile \"" + fileName + "\" failed", e);
-            }
-        }
-    }
 }

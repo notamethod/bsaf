@@ -39,7 +39,8 @@ public class LocalStorageTest
         String dirString = System.getProperty("LocalStorage.dir");
         if (dirString == null)
         {
-            throw new Error("System property \"LocalStorage.dir\" not defined");
+            dirString = "./local-storage.tmp";
+           // throw new Error("System property \"LocalStorage.dir\" not defined");
         }
         File dir = new File(dirString);
         if (!dir.exists())
