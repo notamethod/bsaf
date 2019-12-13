@@ -278,10 +278,10 @@ public class ApplicationAction extends AbstractAction {
 
     /**
      * The name of the {@code @Action} selectedProperty whose value is
-     * returned by {@link #isSelected isSelected}, or null.
+     * returned by {@link #isSelected()}, or null.
      * 
      * @return the name of the selectedProperty or null.
-     * @see #isSelected
+     * @see #isSelected()
      */
     String getSelectedProperty() {
         return selectedProperty;
@@ -777,7 +777,7 @@ public class ApplicationAction extends AbstractAction {
      * 
      * @param selected this Action's JToggleButton's value
      * @see #setProxy
-     * @see #isSelected
+     * @see #isSelected()
      * @see ApplicationActionMap#getActionsObject
      */
     public void setSelected(boolean selected) {

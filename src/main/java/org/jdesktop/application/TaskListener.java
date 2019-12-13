@@ -10,7 +10,7 @@ import java.util.List;
  * Listener used for observing {@code Task} execution.  
  * A {@code TaskListener} is particularly 
  * useful for monitoring the the intermediate results 
- * {@link Task#publish published} by a Task in situations
+ * {@link Task#publish(Object[])}  published} by a Task in situations
  * where it's not practical to override the Task's 
  * {@link Task#process process} method.  Note that if 
  * what you really want to do is monitor a Task's state 
@@ -32,7 +32,7 @@ import java.util.List;
 public interface TaskListener<T, V> {
 
     /**
-     * Called just before the Task's {@link Task#doInBackground
+     * Called just before the Task's {@link Task#doInBackground()}
      * doInBackground} method is called, i.e. just before the task
      * begins running.  The {@code event's} source is the Task and its
      * value is null.

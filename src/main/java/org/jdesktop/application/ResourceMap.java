@@ -879,7 +879,7 @@ public class ResourceMap {
      * @see ResourceConverter#forType
      * @see Font#decode
      * @throws LookupException if an error occurs during lookup or string conversion
-     * @throws IllegalResourceConverteron if <tt>key</tt> is null
+     * @throws IllegalArgumentException if <tt>key</tt> is null
      */
     public final Font getFont(String key) {
         return (Font) getObject(key, Font.class);
@@ -1131,7 +1131,7 @@ public class ResourceMap {
      * <tt>new Dimension(256,256)</tt> respectively.
      * <p>
      * This method calls {@link #getObject} to look up resources
-     * and it uses {@link Introspector#getBeanInfo} to find
+     * and it uses {@link Introspector#getBeanInfo()} to find
      * the target component's properties.
      * <p>
      * If target is null an IllegalArgumentException is thrown.  If a
