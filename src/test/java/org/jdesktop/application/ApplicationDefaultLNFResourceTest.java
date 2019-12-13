@@ -6,6 +6,7 @@
 package org.jdesktop.application;
 
 import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,11 +43,20 @@ public class ApplicationDefaultLNFResourceTest
         {
             assertTrue("OSX default L&F is native", lnf.isNativeLookAndFeel());
         }
+        if ((osName != null) && (!osName.toLowerCase().startsWith("linux")))
+        {
+            // Difference between Gnome (and forks) and Non-Gnome desktops:
+            // GTKLookAndFeel is default LF for Gnome
+            // checking $XDG_CURRENT_DESKTOP doesn't work with Gnome forks.
+            assertFalse("not native L&F "+lnf.getClass().getName(), lnf.isNativeLookAndFeel());
+            String defaultLNFName = UIManager.getCrossPlatformLookAndFeelClassName();
+            System.out.println(defaultLNFName);
+
+            assertEquals("cross platform L&F name", defaultLNFName, lnf.getClass().getName());
+        }
         else
         {
-            String defaultLNFName = UIManager.getCrossPlatformLookAndFeelClassName();
-            assertFalse("not native L&F", lnf.isNativeLookAndFeel());
-            assertEquals("cross platform L&F name", defaultLNFName, lnf.getClass().getName());
+
         }
     }
 }

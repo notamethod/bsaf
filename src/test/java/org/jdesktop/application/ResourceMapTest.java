@@ -432,21 +432,22 @@ public class ResourceMapTest
         assertEquals("Should (now) be an empty set", shouldBeEmpty.size(), 0);
     }
 
-    private ResourceMap injectionResourceMap()
+    private ResourceMap injectionResourceMap(String bundleSuffix)
     {
-        String bundleBaseName = getClass().getPackage().getName() + ".resources.Injection";
+        String bundleBaseName = getClass().getPackage().getName() + ".resources."+bundleSuffix;
         ResourceBundle.getBundle(bundleBaseName);
         ClassLoader classLoader = getClass().getClassLoader();
         ResourceMap resourceMap = new ResourceMap(null, classLoader, bundleBaseName);
         return resourceMap;
     }
 
-    @Test
+    @Test()
     public void testInjectComponentProperties()
     {
-        JLabel label = new JLabel();
+        //JDK8: setMnemonicIndex failed because setter called before setText
+        JLabel label = new JLabel("");
         label.setName("testLabel");
-        ResourceMap rm = injectionResourceMap();
+        ResourceMap rm = injectionResourceMap("Injection");
         rm.injectComponent(label);
         assertEquals("label.getText()", "Hello World", label.getText());
         assertEquals("label.getAlignmentX()", 0.5f, label.getAlignmentX(), EPSILON_FLOAT);
@@ -459,6 +460,9 @@ public class ResourceMapTest
         assertNotNull("label.getIcon()", icon);
         assertEquals("label.getIcon().getIconWidth()", 1, icon.getIconWidth());
         assertEquals("label.getIcon().getIconHeight()", 1, icon.getIconHeight());
+
+        ResourceMap rm2 = injectionResourceMap("InjectionMnemonic");
+        rm2.injectComponent(label);
         assertEquals("label.getDisplayedMnemonicIndex()", 3, label.getDisplayedMnemonicIndex());
         JLabel labelNullText = new JLabel("Hello World");
         labelNullText.setName("labelNullText");
@@ -502,7 +506,7 @@ public class ResourceMapTest
         childPanel.add(new JScrollPane(textField2));
         childPanel.add(mnemonicLabel2);
         childPanel.add(button);
-        injectionResourceMap().injectComponents(mainFrame);
+        injectionResourceMap("Injection").injectComponents(mainFrame);
         assertEquals("mainFrame.getTitle()", "Frame title", mainFrame.getTitle());
         Image image = mainFrame.getIconImage();
         assertNotNull("mainFrame.getIconImage()", image);
