@@ -1,4 +1,4 @@
-# basf
+# bsaf
 Fork of original Better Swing Application Framework (basf)
 
 
@@ -11,5 +11,5 @@ Test passed, but:
 TODOs
 * Fixing javadoc
 * Checking maven plugins
-* Converting to module
+* Converting to module -> done
 
