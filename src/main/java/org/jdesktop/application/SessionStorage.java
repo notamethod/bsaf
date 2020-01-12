@@ -98,8 +98,8 @@ public class SessionStorage {
     /**
      * Constructs a SessionStorage object.  The following {@link
      * PropertySupport PropertySupport} objects are registered by default:
-     * <p>
-     * <table border="1" cellpadding="4%">
+     * <br><br>
+     * <table border="1"> <caption>PropertySupport objects</caption>
      *     <tr>
      *       <th>Base Component Type</th>
      *       <th>PropertySupport</th>
@@ -135,7 +135,7 @@ public class SessionStorage {
      * </pre>
      * 
      * 
-     * @param context
+     * @param context the application context
      * @see ApplicationContext#getSessionStorage
      * @see #getProperty(Class)
      * @see #getProperty(Component)
@@ -307,7 +307,7 @@ public class SessionStorage {
      * 
      * @param root the root of the Component hierarchy to be saved.
      * @param fileName the {@code LocalStorage} filename.
-     * @throws IOException
+     * @throws IOException if saving file fails
      * @see #restore
      * @see ApplicationContext#getLocalStorage
      * @see LocalStorage#save
@@ -369,7 +369,7 @@ public class SessionStorage {
      * 
      * @param root the root of the Component hierarchy to be restored.
      * @param fileName the {@code LocalStorage} filename.
-     * @throws IOException
+     * @throws IOException if restoring filel fails
      * @see #save
      * @see ApplicationContext#getLocalStorage
      * @see LocalStorage#save

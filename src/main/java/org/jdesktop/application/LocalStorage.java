@@ -108,6 +108,7 @@ public class LocalStorage extends AbstractBean {
      * @param fileName  the storage-dependent name
      * @throws IOException if the specified name is invalid,
      *                     or an internal entry cannot be deleted
+     * @return true il the file was deleted, false otherwise
      */
     public boolean deleteFile(String fileName) throws IOException {
         checkFileName(fileName);
@@ -137,7 +138,7 @@ public class LocalStorage extends AbstractBean {
      * Saves the {@code bean} to the local storage
      * @param bean the object ot be saved
      * @param fileName the targen file name
-     * @throws IOException
+     * @throws IOException if saving object fails
      */
     public void save(Object bean, final String fileName) throws IOException {
         AbortExceptionListener el = new AbortExceptionListener();
@@ -177,7 +178,7 @@ public class LocalStorage extends AbstractBean {
      * Loads the been from the local storage
      * @param fileName name of the file to be read from
      * @return loaded object
-     * @throws IOException
+     * @throws IOException if loading object fails
      */
     public Object load(String fileName) throws IOException {
         InputStream ist;

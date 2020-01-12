@@ -114,6 +114,10 @@ public class AbstractBean {
      * @see #addPropertyChangeListener
      * @see #removePropertyChangeListener
      * @see java.beans.PropertyChangeSupport#firePropertyChange(String, Object, Object)
+     *
+     * @param propertyName  the programmatic name of the property that was changed
+     * @param oldValue      the old value of the property
+     * @param newValue      the new value of the property
      */
     protected void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
         pcs.firePropertyChange(propertyName, oldValue, newValue);
@@ -126,7 +130,8 @@ public class AbstractBean {
      * invoke the {@code propertyChange} method on all of the {@code
      * PropertyChangeListeners} added so far, on the event
      * dispatching thread.
-     * 
+     *
+     * @param e the event
      * @see #addPropertyChangeListener
      * @see #removePropertyChangeListener
      * @see java.beans.PropertyChangeSupport#firePropertyChange(PropertyChangeEvent e)

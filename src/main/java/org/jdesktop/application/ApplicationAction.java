@@ -17,9 +17,9 @@ import javax.swing.KeyStroke;
 
 /**
  * The {@link javax.swing.Action} class used to implement the
- * <tt>&#064;Action</tt> annotation.  This class is typically not
+ * <code>&#064;Action</code> annotation.  This class is typically not
  * instantiated directly, it's created as a side effect of constructing
- * an <tt>ApplicationActionMap</tt>:
+ * an <code>ApplicationActionMap</code>:
  * <pre>
  * public class MyActions {
  *     &#064;Action public void anAction() { }  // an &#064;Action named "anAction"
@@ -31,11 +31,11 @@ import javax.swing.KeyStroke;
  * 
  * <p>
  * When an ApplicationAction is constructed, it initializes all of its
- * properties from the specified <tt>ResourceMap</tt>.  Resource names
+ * properties from the specified <code>ResourceMap</code>.  Resource names
  * must match the {@code @Action's} name, which is the name of the
  * corresponding method, or the value of the optional {@code @Action} name
  * parameter.  To initialize the text and shortDescription properties
- * of the action named <tt>"anAction"</tt> in the previous example, one
+ * of the action named <code>"anAction"</code> in the previous example, one
  * would define two resources:
  * <pre>
  * anAction.Action.text = Button/Menu/etc label text for anAction
@@ -48,7 +48,7 @@ import javax.swing.KeyStroke;
  * #ApplicationAction constructor} documentation.
  * 
  * <p>
- * An ApplicationAction's <tt>enabled</tt> and <tt>selected</tt> 
+ * An ApplicationAction's <code>enabled</code> and <code>selected</code> 
  * properties can be delegated to boolean properties of the 
  * Actions class, by specifying the corresponding property names.
  * This can be done with the {@code @Action} annotation, e.g.:
@@ -67,22 +67,22 @@ import javax.swing.KeyStroke;
  * ("anActionEnabled" in this case) with a PropertyChangeListener.
  * 
  * <p>
- * ApplicationActions can automatically <tt>block</tt> the GUI while the 
- * <tt>actionPerformed</tt> method is running, depending on the value of
+ * ApplicationActions can automatically <code>block</code> the GUI while the 
+ * <code>actionPerformed</code> method is running, depending on the value of
  * block annotation parameter.  For example, if the value of block is 
- * <tt>Task.BlockingScope.ACTION</tt>, then the action will be disabled while
+ * <code>Task.BlockingScope.ACTION</code>, then the action will be disabled while
  * the actionPerformed method runs.
  * 
  * <p> 
- * An ApplicationAction can have a <tt>proxy</tt> Action, i.e.
- * another Action that provides the <tt>actionPerformed</tt> method,
+ * An ApplicationAction can have a <code>proxy</code> Action, i.e.
+ * another Action that provides the <code>actionPerformed</code> method,
  * the enabled/selected properties, and values for the Action's long
  * and short descriptions.  If the proxy property is set, this
  * ApplicationAction tracks all of the aforementioned properties, and
- * the <tt>actionPerformed</tt> method just calls the proxy's
- * <tt>actionPerformed</tt> method.  If a <tt>proxySource</tt> is
+ * the <code>actionPerformed</code> method just calls the proxy's
+ * <code>actionPerformed</code> method.  If a <code>proxySource</code> is
  * specified, then it becomes the source of the ActionEvent that's
- * passed to the proxy <tt>actionPerformed</tt> method.  Proxy action 
+ * passed to the proxy <code>actionPerformed</code> method.  Proxy action 
  * dispatching is as simple as this:
  * <pre>
  * public void actionPerformed(ActionEvent actionEvent) {
@@ -121,7 +121,7 @@ public class ApplicationAction extends AbstractAction {
     private final boolean enabledNegated; // support for negated enabledProperty
 
     /**
-     * Construct an <tt>ApplicationAction</tt> that implements an <tt>&#064;Action</tt>.
+     * Construct an <code>ApplicationAction</code> that implements an <code>&#064;Action</code>.
      * 
      * <p>
      * If a {@code ResourceMap} is provided, then all of the 
@@ -158,22 +158,22 @@ public class ApplicationAction extends AbstractAction {
      * <p>
      * A few the resources are handled specially:
      * <ul>
-     * <li><tt>Action.text</tt><br>
+     * <li><code>Action.text</code><br>
      * Used to initialize the Action properties with keys
-     * <tt>Action.NAME</tt>, <tt>Action.MNEMONIC_KEY</tt> and
-     * <tt>Action.DISPLAYED_MNEMONIC_INDEX</tt>.
-     * If the resources's value contains an "&" or an "_" it's 
+     * <code>Action.NAME</code>, <code>Action.MNEMONIC_KEY</code> and
+     * <code>Action.DISPLAYED_MNEMONIC_INDEX</code>.
+     * If the resources's value contains an "&amp;" or an "_" it's
      * assumed to mark the following character as the mnemonic.
      * If Action.mnemonic/Action.displayedMnemonic resources are
      * also defined (an odd case), they'll override the mnemonic 
      * specfied with the Action.text marker character.
      * 
-     * <li><tt>Action.icon</tt><br>
+     * <li><code>Action.icon</code><br>
      * Used to initialize both ACTION.SMALL_ICON,LARGE_ICON.  If 
      * Action.smallIcon or Action.largeIcon resources are also defined
      * they'll override the value defined for Action.icon.
      * 
-     * <li><tt>Action.displayedMnemonicIndexKey</tt><br>
+     * <li><code>Action.displayedMnemonicIndexKey</code><br>
      * The corresponding javax.swing.Action constant is only defined in Java SE 6.
      * We'll set the Action property in Java SE 5 too.
      * </ul>
@@ -303,23 +303,23 @@ public class ApplicationAction extends AbstractAction {
      * Set the proxy for this action.  If the proxy is non-null then 
      * we delegate/track the following:
      * <ul>
-     * <li><tt>actionPerformed</tt><br>
-     * Our <tt>actionPerformed</tt> method calls the delegate's after 
-     * the ActionEvent source to be the value of <tt>getProxySource</tt>
+     * <li><code>actionPerformed</code><br>
+     * Our <code>actionPerformed</code> method calls the delegate's after 
+     * the ActionEvent source to be the value of <code>getProxySource</code>
      * 
-     * <li><tt>shortDescription</tt><br>
+     * <li><code>shortDescription</code><br>
      * If the proxy's shortDescription, i.e. the value for key
      * {@link javax.swing.Action#SHORT_DESCRIPTION SHORT_DESCRIPTION} is not null,
      * then set this action's shortDescription.  Most Swing components use
      * the shortDescription to initialize their tooltip.
      * 
-     * <li><tt>longDescription</tt><br>
+     * <li><code>longDescription</code><br>
      * If the proxy's longDescription, i.e. the value for key
      * {@link javax.swing.Action#LONG_DESCRIPTION LONG_DESCRIPTION} is not null,
      * then set this action's longDescription.  
      * </ul>
      * 
-     * @param proxy
+     * @param proxy the proxy to set
      * @see #setProxy
      * @see #setProxySource
      * @see #actionPerformed
@@ -343,7 +343,7 @@ public class ApplicationAction extends AbstractAction {
     }
 
     /**
-     * Return the value that becomes the <tt>ActionEvent</tt> source  before
+     * Return the value that becomes the <code>ActionEvent</code> source  before
      * the ActionEvent is passed along to the proxy Action.
      * 
      * @return the value of the proxySource property.
@@ -356,10 +356,10 @@ public class ApplicationAction extends AbstractAction {
     }
 
     /**
-     * Set the value that becomes the <tt>ActionEvent</tt> source before
+     * Set the value that becomes the <code>ActionEvent</code> source before
      * the ActionEvent is passed along to the proxy Action.  
      * 
-     * @param source the <tt>ActionEvent</tt> source/
+     * @param source the <code>ActionEvent</code> source/
      * @see #getProxy
      * @see #getProxySource
      * @see ActionEvent#setSource
@@ -505,7 +505,7 @@ public class ApplicationAction extends AbstractAction {
     /**
      * 
      * The name of this Action.  This string begins with the name
-     * the corresponding &#064;Action method (unless the <tt>name</tt>
+     * the corresponding &#064;Action method (unless the <code>name</code>
      * &#064;Action parameter was specified).
      * 
      * <p>
@@ -516,7 +516,7 @@ public class ApplicationAction extends AbstractAction {
      * <p> 
      * Note: this property should not confused with the {@link
      * javax.swing.Action#NAME Action.NAME} key.  That key is actually
-     * used to initialize the <tt>text</tt> properties of Swing
+     * used to initialize the <code>text</code> properties of Swing
      * components, which is why we call the corresponding
      * ApplicationAction resource "Action.text", as in:
      * <pre> 
@@ -544,36 +544,37 @@ public class ApplicationAction extends AbstractAction {
      * Provides parameter values to &#064;Action methods.  By default, parameter
      * values are selected based exclusively on their type:
      * <table border=1>
+     *     <caption>Parameters</caption>
      *   <tr> 
      *     <th>Parameter Type</th> 
      *     <th>Parameter Value</th> 
      *   </tr>
      *   <tr> 
-     *     <td><tt>ActionEvent</tt></td> 
-     *     <td><tt>actionEvent</tt></td> 
+     *     <td><code>ActionEvent</code></td> 
+     *     <td><code>actionEvent</code></td> 
      *   </tr>
      *   <tr> 
-     *     <td><tt>javax.swing.Action</tt></td> 
-     *     <td>this <tt>ApplicationAction</tt> object</td> 
+     *     <td><code>javax.swing.Action</code></td> 
+     *     <td>this <code>ApplicationAction</code> object</td> 
      *   </tr>
      *   <tr> 
-     *     <td><tt>ActionMap</tt></td> 
-     *     <td>the <tt>ActionMap</tt> that contains this <tt>Action</tt></td> 
+     *     <td><code>ActionMap</code></td> 
+     *     <td>the <code>ActionMap</code> that contains this <code>Action</code></td> 
      *   </tr>
      *   <tr> 
-     *     <td><tt>ResourceMap</tt></td> 
-     *     <td>the <tt>ResourceMap</tt> of the the <tt>ActionMap</tt> that contains this <tt>Action</tt></td> 
+     *     <td><code>ResourceMap</code></td> 
+     *     <td>the <code>ResourceMap</code> of the the <code>ActionMap</code> that contains this <code>Action</code></td> 
      *   </tr>
      *   <tr> 
-     *     <td><tt>ApplicationContext</tt></td> 
-     *     <td>the value of <tt>ApplicationContext.getInstance()</tt></td> 
+     *     <td><code>ApplicationContext</code></td> 
+     *     <td>the value of <code>ApplicationContext.getInstance()</code></td> 
      *   </tr>
      * </table>
      * 
      * <p> 
      * ApplicationAction subclasses may also select values based on
-     * the value of the <tt>Action.Parameter</tt> annotation, which is
-     * passed along as the <tt>pKey</tt> argument to this method:
+     * the value of the <code>Action.Parameter</code> annotation, which is
+     * passed along as the <code>pKey</code> argument to this method:
      * <pre>
      * &#064;Action public void doAction(&#064;Action.Parameter("myKey") String myParameter) {
      *    // The value of myParameter is computed by:
@@ -582,13 +583,14 @@ public class ApplicationAction extends AbstractAction {
      * </pre>
      * 
      * <p>
-     * If <tt>pType</tt> and <tt>pKey</tt> aren't recognized, this method 
+     * If <code>pType</code> and <code>pKey</code> aren't recognized, this method 
      * calls {@link #actionFailed} with an IllegalArgumentException.
      * 
      * 
      * @param pType parameter type
      * @param pKey the value of the &#064;Action.Parameter annotation
      * @param actionEvent the ActionEvent that trigged this Action
+     * @return the argument
      */
     protected Object getActionArgument(Class pType, String pKey, ActionEvent actionEvent) {
         Object argument = null;
@@ -665,14 +667,12 @@ public class ApplicationAction extends AbstractAction {
     }
 
     /**
-     * This method implements this <tt>Action's</tt> behavior.  
+     * This method implements this <code>Action's</code> behavior.
      * <p>
      * If there's a proxy Action then call its actionPerformed
      * method.  Otherwise, call the &#064;Action method with parameter
      * values provided by {@code getActionArgument()}.  If anything goes wrong
-     * call {@code actionFailed()}.  
-     * 
-     * @param actionEvent @{inheritDoc}
+     * call {@code actionFailed()}.
      * @see #setProxy
      * @see #getActionArgument
      * @see Task
@@ -848,7 +848,7 @@ public class ApplicationAction extends AbstractAction {
 
     /**
      * Returns a string representation of this
-     * <tt>ApplicationAction</tt> that should be useful for debugging.
+     * <code>ApplicationAction</code> that should be useful for debugging.
      * If the action is enabled it's name is enclosed by parentheses;
      * if it's selected then a "+" appears after the name.  If the
      * action will appear with a text label, then that's included too.

@@ -27,6 +27,7 @@ import java.lang.annotation.Target;
 public @interface Resource {
     /**
      * Key for resource injection. If not specified the name of the field will be used.
+     * @return the key
      */
     String key() default "";
 }

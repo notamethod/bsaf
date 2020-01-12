@@ -7,7 +7,7 @@ import java.util.EventObject;
  * methods: {@code doInBackground()}, {@code process}, {@code done}. The source
  * of a {@code TaskEvent} is the {@code Task} that produced the value.
  * 
- * @param <T> 
+ * @param <T> event
  * @see TaskListener
  * @see Task
  */

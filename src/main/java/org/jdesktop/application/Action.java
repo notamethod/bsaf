@@ -62,32 +62,45 @@ public @interface Action {
 
     /**
      * The action name. The method name is used as an action name if not specified.
+     *
+     * @return the action name
      */
     String name() default "";
 
     /**
      * The parameter binds the enabled state of the @Action to the current value of a property.
+     *
+     * @return the property name
      */
     String enabledProperty() default "";
 
     /**
      * The parameter binds the disabled state of the @Action to the current value of a property.
+     *
+     * @return the property name
      */
     String disabledProperty() default "";
 
     /**
      * The parameter binds the selected state of the @Action to the current value of a property.
+     *
+     * @return the property name
      */
     String selectedProperty() default "";
 
     /**
      * The parameter associates this action to a specific task service
+     *
+     * @return The service for executing tasks
      */
     String taskService() default TaskService.DEFAULT_NAME;
     
     /**
      * The parameter indicates that the GUI should be blocked while the background task is running.
+     *
+     * @return The blocking scope
      * @see Task
+     * @see BlockingScope
      */
     BlockingScope block() default BlockingScope.NONE;
     

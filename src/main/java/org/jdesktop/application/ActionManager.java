@@ -142,9 +142,9 @@ public class ActionManager extends AbstractBean {
      * its {@code ApplicationActions} and their {@code
      * ApplicationActionMaps}, then the cached {@code ActionMap} entry
      * will be cleared.
-     * 
-     * @param actionsClass
-     * @param actionsObject
+     *
+     * @param actionsClass a super class for the {@code actionsObject}.
+     * @param actionsObject the object to be scanned for the actions.
      * @see #getActionMap()
      * @see ApplicationContext#getActionMap()
      * @see ApplicationContext#getActionMap(Class, Object)

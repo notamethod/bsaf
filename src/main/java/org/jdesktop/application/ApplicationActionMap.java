@@ -15,12 +15,12 @@ import javax.swing.ActionMap;
 
 /**
  * An {@link javax.swing.ActionMap ActionMap} class where each entry 
- * corresponds to an <tt>&#064;Action</tt> method from a single 
- * <tt>actionsClass</tt> (i.e. a class that contains one or more 
- * <tt>&#064;Actions</tt>).  Each entry's key is the <tt>&#064;Action's</tt>
+ * corresponds to an <code>&#064;Action</code> method from a single
+ * <code>actionsClass</code> (i.e. a class that contains one or more
+ * <code>&#064;Actions</code>).  Each entry's key is the <code>&#064;Action's</code>
  * name (the method name by default), and the value is an 
- * {@link ApplicationAction} that calls the <tt>&#064;Actions</tt> method.
- * For example, the code below prints <tt>"Hello World"</tt>:
+ * {@link ApplicationAction} that calls the <code>&#064;Actions</code> method.
+ * For example, the code below prints <code>"Hello World"</code>:
  * <pre>
  * public class HelloWorldActions {
  *     public &#064;Action void Hello() { System.out.print("Hello "); }
@@ -34,8 +34,8 @@ import javax.swing.ActionMap;
  * </pre>
  * 
  * <p>
- * If a <tt>ResourceMap</tt> is provided then each
- * <tt>ApplicationAction's</tt> ({@link javax.swing.Action#putValue
+ * If a <code>ResourceMap</code> is provided then each
+ * <code>ApplicationAction's</code> ({@link javax.swing.Action#putValue
  * putValue}, {@link javax.swing.Action#getValue getValue}) properties
  * are initialized from the ResourceMap.  
  * 

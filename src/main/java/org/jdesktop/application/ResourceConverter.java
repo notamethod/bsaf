@@ -18,36 +18,36 @@ import java.util.List;
  * A base class for converting arbitrary types to and from Strings, as well as 
  * a registry of ResourceConverter implementations.
  * <p>
- * The <tt>supportsType</tt> method defines what types a ResourceConverter supports.
+ * The <code>supportsType</code> method defines what types a ResourceConverter supports.
  * By default it returns true for classes that are equal to the constructor's
- * <tt>type</tt> argument.  The <tt>parseType</tt> methods converts a string
- * the ResourceConverter's supported type, and the <tt>toString</tt> does the 
+ * <code>type</code> argument.  The <code>parseType</code> methods converts a string
+ * the ResourceConverter's supported type, and the <code>toString</code> does the
  * inverse, it converts a supported type to a String.  Concrete ResourceConverter 
- * subclasses must override <tt>parseType()</tt> and, in most cases, the 
- * <tt>toString</tt> method as well.
+ * subclasses must override <code>parseType()</code> and, in most cases, the
+ * <code>toString</code> method as well.
  * <p>
  * This class maintains a registry of ResourceConverters.  
- * The <tt>forType</tt> method returns the first ResourceConverter that 
+ * The <code>forType</code> method returns the first ResourceConverter that
  * supports a particular type, new ResourceConverters can be added with 
- * <tt>register()</tt>.  A small set of generic ResourceConverters are 
+ * <code>register()</code>.  A small set of generic ResourceConverters are
  * registered by default.  They support the following types:
  * <ul>
- * <li><tt>Boolean</tt></li>
- * <li><tt>Integer</tt></li>
- * <li><tt>Float</tt></li>
- * <li><tt>Double</tt></li>
- * <li><tt>Long</tt></li>
- * <li><tt>Short</tt></li>
- * <li><tt>Byte</tt></li>
- * <li><tt>MessageFormat</tt></li>
- * <li><tt>URL</tt></li>
- * <li><tt>URI</tt></li>
+ * <li><code>Boolean</code></li>
+ * <li><code>Integer</code></li>
+ * <li><code>Float</code></li>
+ * <li><code>Double</code></li>
+ * <li><code>Long</code></li>
+ * <li><code>Short</code></li>
+ * <li><code>Byte</code></li>
+ * <li><code>MessageFormat</code></li>
+ * <li><code>URL</code></li>
+ * <li><code>URI</code></li>
  * </ul>
  * <p>
  * The Boolean ResourceConverter returns true for "true", "on", "yes",
  * false otherwise.  The other primitive type ResourceConverters rely on
  * the corresponding static parse<i>Type</i> method,
- * e.g. <tt>Integer.parseInt()</tt>.  The MessageFormat
+ * e.g. <code>Integer.parseInt()</code>.  The MessageFormat
  * ResourceConverter just creates MessageFormat object with the string
  * as its constructor argument.  The URL/URI converters just apply
  * the corresponding constructor to the resource string.
@@ -64,7 +64,7 @@ public abstract class ResourceConverter {
      * @param s the string to be parsed
      * @param r the {@code ResourceMap}
      * @return the object which was created from the string
-     * @throws org.jdesktop.application.ResourceConverter.ResourceConverterException
+     * @throws org.jdesktop.application.ResourceConverter.ResourceConverterException if parsing fails
      */
     public abstract Object parseString(String s, ResourceMap r)
             throws ResourceConverterException;
@@ -91,7 +91,7 @@ public abstract class ResourceConverter {
 
     /**
      * Checks whether {@code testType} can be converted with this converter.
-     * @param testType
+     * @param testType type class to test
      * @return {@code true} if {@code testType} can be converted with this converter.
      */
     public boolean supportsType(Class testType) {

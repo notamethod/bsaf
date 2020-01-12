@@ -20,7 +20,7 @@ import javax.swing.SwingUtilities;
  * The service for executing tasks
  * <p>
  * Methods descriptions are copied from {@link ExecutorService}
- * <p>
+ * </p>
  */
 public class TaskService extends AbstractBean {
     public static final String DEFAULT_NAME = "default";
@@ -52,6 +52,7 @@ public class TaskService extends AbstractBean {
      * Creates a new {@code TaskService} with default executor.
      * The default executor is a ThreadPoolExecutor with core pool size = 3,
      * maximum pool size = 10, threads live time = 1 second and queue of type
+     * @param name the name of the service
      * {@link LinkedBlockingQueue}.
      */
     public TaskService(String name) {
@@ -169,8 +170,8 @@ public class TaskService extends AbstractBean {
      *         shutting down this ExecutorService may manipulate
      *         threads that the caller is not permitted to modify
      *         because it does not hold {@link
-     *         java.lang.RuntimePermission}<tt>("modifyThread")</tt>,
-     *         or the security manager's <tt>checkAccess</tt> method
+     *         java.lang.RuntimePermission}<code>("modifyThread")</code>,
+     *         or the security manager's <code>checkAccess</code> method
      *         denies access.
      */
     public final void shutdown() {
@@ -192,8 +193,8 @@ public class TaskService extends AbstractBean {
      *         shutting down this ExecutorService may manipulate
      *         threads that the caller is not permitted to modify
      *         because it does not hold {@link
-     *         java.lang.RuntimePermission}<tt>("modifyThread")</tt>,
-     *         or the security manager's <tt>checkAccess</tt> method
+     *         java.lang.RuntimePermission}<code>("modifyThread")</code>,
+     *         or the security manager's <code>checkAccess</code> method
      *         denies access.
      */
     public final List<Runnable> shutdownNow() {
@@ -201,20 +202,20 @@ public class TaskService extends AbstractBean {
     }
 
     /**
-     * Returns <tt>true</tt> if this executor has been shut down.
+     * Returns <code>true</code> if this executor has been shut down.
      *
-     * @return <tt>true</tt> if this executor has been shut down
+     * @return <code>true</code> if this executor has been shut down
      */
     public final boolean isShutdown() {
         return executorService.isShutdown();
     }
 
     /**
-     * Returns <tt>true</tt> if all tasks have completed following shut down.
-     * Note that <tt>isTerminated</tt> is never <tt>true</tt> unless
-     * either <tt>shutdown</tt> or <tt>shutdownNow</tt> was called first.
+     * Returns <code>true</code> if all tasks have completed following shut down.
+     * Note that <code>isTerminated</code> is never <code>true</code> unless
+     * either <code>shutdown</code> or <code>shutdownNow</code> was called first.
 
-     * @return <tt>true</tt> if all tasks have completed following shut down
+     * @return <code>true</code> if all tasks have completed following shut down
      */
     public final boolean isTerminated() {
         return executorService.isTerminated();
@@ -227,8 +228,8 @@ public class TaskService extends AbstractBean {
      *
      * @param timeout the maximum time to wait
      * @param unit the time unit of the timeout argument
-     * @return <tt>true</tt> if this executor terminated and
-     *         <tt>false</tt> if the timeout elapsed before termination
+     * @return <code>true</code> if this executor terminated and
+     *         <code>false</code> if the timeout elapsed before termination
      * @throws InterruptedException if interrupted while waiting
      */
     public final boolean awaitTermination(long timeout, TimeUnit unit) throws InterruptedException {

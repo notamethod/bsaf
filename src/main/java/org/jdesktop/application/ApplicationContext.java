@@ -74,7 +74,7 @@ public class ApplicationContext extends AbstractBean {
      * configuration.  Normal applications shouldn't need to 
      * call it directly.
      *
-     * @param applicationClass
+     * @param applicationClass the application class to set
      * @see #getApplicationClass
      */
     public final synchronized void setApplicationClass(Class applicationClass) {
@@ -263,9 +263,9 @@ public class ApplicationContext extends AbstractBean {
      * <pre>
      * return getActionManager().getActionMap(actionsClass, actionsObject)
      * </pre>
-     * 
-     * @param actionsClass
-     * @param actionsObject
+     *
+     * @param actionsClass a super class for the {@code actionsObject}.
+     * @param actionsObject the object to be scanned for the actions.
      * @return the {@code ActionMap} chain for the entire {@code Application}.
      * @see ActionManager#getActionMap(Class, Object)
      */
@@ -275,8 +275,8 @@ public class ApplicationContext extends AbstractBean {
 
     /** 
      * Defined as {@code getActionMap(actionsObject.getClass(), actionsObject)}.
-     * 
-     * @param actionsObject
+     *
+     * @param actionsObject the object to be scanned for the actions.
      * @return the {@code ActionMap} for the specified object
      * @see #getActionMap(Class, Object)
      */

@@ -308,7 +308,7 @@ public abstract class SingleFrameApplication extends Application {
      * <p>
      * Throws an IllegalArgumentException if {@code c} is null
      *
-     * @param c
+     * @param c the frame to show
      * @see #show(JComponent)
      * @see #show(JDialog)
      * @see #configureWindow

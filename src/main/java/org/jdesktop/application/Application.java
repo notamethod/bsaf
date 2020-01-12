@@ -157,10 +157,10 @@ public abstract class Application extends AbstractBean {
      * Creates an instance of the specified {@code Application}
      * subclass, sets the {@code ApplicationContext} {@code
      * application} property, and then calls the new {@code
-     * Application's} {@code initialize} and {@code startup} methods.  
-     * 
+     * Application's} {@code initialize} and {@code startup} methods.
+     *
      * When UI is ready, method {@code ready} is called.
-     * 
+     *
      * The {@code launch} method is
      * typically called from the Application's {@code main}:
      * <pre>
@@ -170,9 +170,10 @@ public abstract class Application extends AbstractBean {
      * </pre>
      * The {@code applicationClass} constructor and {@code startup} methods
      * run on the event dispatching thread.
-     * 
+     *
      * @param applicationClass the {@code Application} class to launch
      * @param args {@code main} method arguments
+     * @param <T> the application type
      * @see #shutdown
      * @see ApplicationContext#getApplication
      */
@@ -458,7 +459,7 @@ public abstract class Application extends AbstractBean {
     /**
      * Handles quit even on Mac Os X
      * Developer should not use it directly
-     * @return always <tt>true</tt>
+     * @return always <code>true</code>
      */
     public boolean handleQuit() {
         exit();
@@ -646,7 +647,7 @@ public abstract class Application extends AbstractBean {
      * <p>
      * This method is only called after an Application has
      * been launched.
-     * 
+     * @param <T> the type parameter
      * @param applicationClass this Application's subclass
      * @return the launched Application singleton.
      * @see Application#launch
@@ -708,7 +709,7 @@ public abstract class Application extends AbstractBean {
 
     /**
      * Hides the application {@code View}
-     * @param view
+     * @param view the view
      * @see View
      */
     public void hide(View view) {

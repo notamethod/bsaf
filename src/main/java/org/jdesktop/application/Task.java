@@ -46,7 +46,7 @@ import javax.swing.SwingWorker;
  * <p>
  * For example: given a Task called {@code MyTask} defined like this:
  * <pre> 
- * class MyTask extends Task<MyResultType, Void> { 
+ * class MyTask extends Task&lt;MyResultType, Void&gt; {
  *     protected MyResultType doInBackground() { 
  *         message("startMessage", getPlannedSubtaskCount()); 
  *         // do the work ... if an error is encountered:
@@ -232,7 +232,7 @@ public abstract class Task<T, V> extends SwingWorker<T, V> {
      * the {@code resourcePrefix} parameter, followed by a ".", as a
      * prefix
      * 
-     * @param application
+     * @param application the application
      * @param resourceMap the ResourceMap for the Task's user properties, can be null
      * @param resourcePrefix prefix for resource names, can be null
      * @see #getResourceMap
@@ -265,7 +265,7 @@ public abstract class Task<T, V> extends SwingWorker<T, V> {
      *  {@code title}, {@code description}, and {@code message} Task properties
      * and for message {@link java.util.Formatter format} strings.
      * 
-     * @param application
+     * @param application the application
      * @param resourcePrefix prefix for resource names, can be null
      * @see #getResourceMap
      * @see #setTitle
@@ -286,7 +286,7 @@ public abstract class Task<T, V> extends SwingWorker<T, V> {
      * prefix, whose ResourceMap is the value of
      * <code>ApplicationContext.getInstance().getResourceMap(this.getClass(),
      * Task.class)</code>.
-     * @param application
+     * @param application the application
      */
     public Task(Application application) {
         this.application = application;
@@ -721,6 +721,7 @@ public abstract class Task<T, V> extends SwingWorker<T, V> {
      * a PropertyChangeEvent for the "started" property is fired.  Similarly
      * when a started Task's state changes to {@code StateValue.DONE}, a
      * "done" PropertyChangeEvent is fired.
+     * @return true if the task is in a pending state, otherwise false
      */
     public final boolean isPending() {
         return getState() == StateValue.PENDING;
@@ -741,12 +742,11 @@ public abstract class Task<T, V> extends SwingWorker<T, V> {
 
     /**
      * {@inheritDoc}
-     * <p>
+     * <br><br>
      * This method fires the TaskListeners' {@link TaskListener#process process}
      * method.  If you override {@code process} and do not call 
      * {@code super.process(values)}, then the TaskListeners will not run.
-     * 
-     * @param values @{inheritDoc}
+     *
      */
     @Override
     protected void process(List<V> values) {
@@ -772,10 +772,8 @@ public abstract class Task<T, V> extends SwingWorker<T, V> {
      * Called when this Task has successfully completed, i.e. when 
      * its {@code get} method returns a value.  Tasks that compute
      * a value should override this method.
-     * <p>
-     * <p>
+     * <br><br>
      * This method runs on the EDT.  It does nothing by default.
-     *
      * @param result the value returned by the {@code get} method
      * @see #done
      * @see #get
@@ -807,7 +805,6 @@ public abstract class Task<T, V> extends SwingWorker<T, V> {
      * @param cause the {@link Throwable#getCause cause} of the {@code ExecutionException}
      * @see #done
      * @see #get
-     * @see #failed
      */
     protected void failed(Throwable cause) {
         String msg = String.format("%s failed: %s", this, cause);
@@ -1056,7 +1053,7 @@ public abstract class Task<T, V> extends SwingWorker<T, V> {
      * <p> 
      * This is a bound property.
      * 
-     * @param inputBlocker
+     * @param inputBlocker the inputBlocker to set
      * @see #getInputBlocker
      */
     public final void setInputBlocker(InputBlocker inputBlocker) {
@@ -1086,16 +1083,16 @@ public abstract class Task<T, V> extends SwingWorker<T, V> {
      * what part of the GUI's input will be blocked:
      * <dl>
      * <dt><b><code>Task.BlockingScope.NONE</code></b><dt>Don't block input.  The blocking
-     * target is ignored in this case.<p></p>
+     * target is ignored in this case.<br>
      * <dt><b><code>Task.BlockingScope.ACTION</code></b><dt>Disable the target 
-     * {@link javax.swing.Action Action} while the Task is executing.<p></p>
+     * {@link javax.swing.Action Action} while the Task is executing.<br>
      * <dt><b><code>Task.BlockingScope.COMPONENT</code></b><dt>Disable the target 
-     * {@link java.awt.Component} Component while the Task is executing. <p></p>
+     * {@link java.awt.Component} Component while the Task is executing. <br>
      * <dt><b><code>Task.BlockingScope.WINDOW</code></b><dt> Block the Window ancestor of the
-     * target Component while the Task is executing.<p></p>
+     * target Component while the Task is executing.<br><br>
      * <dt><b><code>Task.BlockingScope.Application</code></b><dt> Block the entire Application
      * while the Task is executing.  The blocking target is ignored
-     * in this case.<p></p>
+     * in this case.<br><br>
      * </dl>
      * <p>
      * Input blocking begins when the {@code block} method is called and

@@ -218,7 +218,7 @@ public class View extends AbstractBean {
      * <p>
      * This is a bound property.  The default value is an empty list.
      * 
-     * @param toolBars
+     * @param toolBars the toolbars to setin the view
      * @see #setToolBar(JToolBar)
      * @see #getToolBars()
      */

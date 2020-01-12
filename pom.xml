@@ -167,19 +167,25 @@
             <executions>
               <execution>
                 <id>attach-javadocs</id>
-                <!-- fix for intellij ?
-                <configuration>
-                  <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
-                </configuration>
-                -->
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
+                <!-- fix for intellij -->
+               <configuration>
+                 <!-- intellij fix -->
+                 <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+                 <javaApiLinks>
+                   <property>
+                     <name>api_1.11</name>
+                     <value>https://docs.oracle.com/en/java/javase/11/docs/api/</value>
+                   </property>
+                 </javaApiLinks>
+               </configuration>
+               <goals>
+                 <goal>jar</goal>
+               </goals>
+             </execution>
+           </executions>
+         </plugin>
+       </plugins>
+     </build>
+   </profile>
+ </profiles>
 </project>

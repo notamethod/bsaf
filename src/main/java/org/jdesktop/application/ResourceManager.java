@@ -86,7 +86,7 @@ public class ResourceManager extends AbstractBean {
      * </pre>
      * 
      * FIXME - @param javadoc
-     * @param context
+     * @param context the application context
      * @see ApplicationContext#getResourceManager
      * @see ApplicationContext#getResourceMap
      */
@@ -206,8 +206,8 @@ public class ResourceManager extends AbstractBean {
      * com/foo/bar/resources/MyScreen.properties}.  The following table
      * is a list of the ResourceMaps and their constituent 
      * ResourceBundles for the same example:
-     * <p>
-     * <table border="1" cellpadding="4%">
+     * <br><br>
+     * <table border="1">
      *   <caption><em>ResourceMap chain for class MyScreen in MyApp</em></caption>
      *     <tr>
      *       <th></th>
@@ -321,11 +321,11 @@ public class ResourceManager extends AbstractBean {
      * {@code com.foo.bar.MyApp}, and MyApp was a subclass
      * of {@code SingleFrameApplication.class}, then the 
      * ResourceBundle names would be:
-     * <code><ol>
+     * <ol>
      * <li>com.foo.bar.resources.MyApp</li>
      * <li>javax.swing.application.resources.SingleFrameApplication</li>
      * <li>javax.swing.application.resources.Application</li>
-     * </code></ol>
+     * </ol>
      * <p> 
      * The default value of this property is computed lazily and
      * cached.  If it's reset, then all ResourceMaps cached by
@@ -358,7 +358,7 @@ public class ResourceManager extends AbstractBean {
      * application.  More information about the property is provided
      * by the {@link #getApplicationBundleNames} method.  
      * 
-     * @param bundleNames
+     * @param bundleNames list of names of the ResourceBundles
      * @see #setApplicationBundleNames
      */
     public void setApplicationBundleNames(List<String> bundleNames) {
@@ -498,7 +498,7 @@ public class ResourceManager extends AbstractBean {
      * in the Application {@link Application#initialize initialize}
      * method.  
      * 
-     * @param platform 
+     * @param platform the PlatformType to set
      * @see #getPlatform
      * @see System#getProperty
      */
