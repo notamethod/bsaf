@@ -7,13 +7,14 @@ package org.jdesktop.application;
 
 import java.lang.reflect.InvocationTargetException;
 import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.awt.event.ActionEvent;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 /**
  * Test the Actions that are defined by the Application class:
@@ -26,7 +27,11 @@ public class ApplicationActionsTest
 {
     public static final String DIRECTACTION = "directAction";
     public static final String NEGATEDACTION = "negatedAction";
+    public static LookAndFeel lookAndFeel = null;
 
+    @AfterClass public static void after() throws UnsupportedLookAndFeelException {
+        UIManager.setLookAndFeel(lookAndFeel);
+    }
     public static class DefaultActionsApplication extends WaitForStartupApplication
     {
         boolean deleteCalled = false;
@@ -81,9 +86,15 @@ public class ApplicationActionsTest
     @BeforeClass
     public static void unitSetup()
     {
+        lookAndFeel = UIManager.getLookAndFeel();
         DefaultActionsApplication.launchAndWait(DefaultActionsApplication.class);
     }
-
+    @Before
+    public  void unitSetup2()
+    {
+        //lookAndFeel = UIManager.getLookAndFeel();
+        DefaultActionsApplication.launchAndWait(DefaultActionsApplication.class);
+    }
 
     private String actionText(ApplicationAction action)
     {
