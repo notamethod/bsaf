@@ -1392,6 +1392,7 @@ public class ResourceMap {
         if (url != null) {
             return new ImageIcon(url);
         } else {
+            //this will fail if resource package is not opened in module-info
             String msg = String.format("couldn't find Icon resource \"%s\"", s);
             throw new ResourceConverterException(msg, s);
         }
