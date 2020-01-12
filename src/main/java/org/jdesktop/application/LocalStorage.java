@@ -455,7 +455,7 @@ public class LocalStorage extends AbstractBean {
      * require apps that aren't web started to bundle javaws.jar
      */
     private LocalIO getPersistenceServiceIO() {
-        System.out.println("JNLP is dead !");
+        logger.log(Level.WARNING, "getPersistenceServiceIO returns null because JNLP support removed from jdk");
         return null;
     }
 

@@ -12,6 +12,9 @@ import java.util.EventObject;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
+
+import org.jdesktop.application.utils.AppHelper;
+import org.jdesktop.application.utils.PlatformType;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -128,16 +131,21 @@ public class SplitPaneInMaximizedFrameTest {
     }
 
     @Test
-    @Ignore("Fails on JDK8 (linux): can't grow above 135")
     public void testBadSessionState() throws Exception
     {
-        final SplitPaneTest app = Application.getInstance(SplitPaneTest.class);
-        assertEquals(DIVIDER_LOCATION, app.split.getDividerLocation());
-        Runnable doExit = new Runnable()
-        {
-            @Override
-            public void run() { app.exit(); }  // override doesn't call System.exit
-        };
-        SwingUtilities.invokeAndWait(doExit);
+        PlatformType platformType = AppHelper.getPlatform();
+        if (platformType.equals(PlatformType.WINDOWS)) {
+            final SplitPaneTest app = Application.getInstance(SplitPaneTest.class);
+            assertEquals(DIVIDER_LOCATION, app.split.getDividerLocation());
+            Runnable doExit = new Runnable() {
+                @Override
+                public void run() {
+                    app.exit();
+                }  // override doesn't call System.exit
+            };
+            SwingUtilities.invokeAndWait(doExit);
+        }else{
+            System.err.println("Test ignored for platform "+platformType+ ". Fails with linux: can't grow above 135, works on windows, untested with others.");
+        }
     }
 }

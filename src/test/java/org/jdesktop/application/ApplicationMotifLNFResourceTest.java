@@ -18,9 +18,11 @@ import javax.swing.*;
  * to be "com.sun.java.swing.plaf.motif.MotifLookAndFeel" causes
  * the UIManager.lookAndFeel property to be initialized to the
  * Motif L&F.
- *
+ * @deprecated TheMotifLookAndFeel is deprecated for removal in jdk13
  * @author Hans Muller (Hans.Muller@Sun.COM)
  */
+@Ignore("Test on MotifLookAndFeel removed because package is com.sun and is not visible")
+@Deprecated
 public class ApplicationMotifLNFResourceTest
 {
 
@@ -38,7 +40,7 @@ public class ApplicationMotifLNFResourceTest
     }
 
     @Test
-    @Ignore("Test on MotifLookAndFeel removed because package is com.sun and is not visible")
+
     public void testApplicationLookAndFeelResource()
     {
 //        ApplicationContext ctx = Application.getInstance(ApplicationMotifLNF.class).getContext();
